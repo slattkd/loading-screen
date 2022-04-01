@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
+
+$angle: 0;
+$rotate: 2;
+$bg-color1: #EDCE86;
+$bg-color2: #9D6439;
+$bg-color3: #596B59;
+$rgb1: 60;
+$rgb2: 255;
+$rgb3: 250;
+$duration: 6s;
+
+* {
+	margin: 0;
+	box-sizing: border-box;
+}
+body {
+	background: $bg-color1 fixed;
+	background-image: linear-gradient(
+		$angle + deg,
+		rgba($rgb1, $rgb2, $rgb3, 1),
+		transparent
+	);
+	animation-name: bg-spin, bg-color;
+	animation-duration: $duration, ($duration * 2);
+	animation-direction: alternate, normal;
+	animation-iteration-count: infinite;
+	-webkit-animation-name: bg-spin, bg-color;
+	-webkit-animation-duration: $duration, ($duration * 2);
+	-webkit-animation-direction: alternate, normal;
+	-webkit-animation-iteration-count: infinite;
+}
+
+.center {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	justify-content: center;
+	height: 90vh;
+}
+
+svg {
+	margin-left: auto;
+	margin-right: auto;
+	opacity: 0.75;
+}
+
+@keyframes bg-color {
+	0% {
+		background-color: $bg-color1;
+	}
+	30% {
+		background-color: $bg-color2;
+	}
+	80% {
+		background-color: $bg-color3;
+	}
+}
+
+@-webkit-keyframes bg-color {
+	0% {
+		background-color: $bg-color1;
+	}
+	30% {
+		background-color: $bg-color2;
+	}
+	80% {
+		background-color: $bg-color3;
+	}
+}
+
+@keyframes bg-spin {
+	@for $percent from 0 through 100 {
+		#{$percent}% {
+			background-image: linear-gradient(
+				#{($angle)}deg,
+				rgba($rgb1, $rgb2, $rgb3, 1),
+				transparent
+			);
+		}
+		$angle: $angle + $rotate;
+		$rgb1: $rgb1 + 2.55;
+		$rgb2: $rgb2 - 1.275;
+		$rgb3: $rgb3 - 0.6375;
+	}
+}
